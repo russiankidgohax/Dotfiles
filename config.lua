@@ -35,8 +35,7 @@ lvim.keys.normal_mode["<leader>bg"] = "<cmd>lua require('user.background').Toggl
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-
--- -- Use which-key to add extra bindings with the leader-key prefix
+-- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
@@ -46,7 +45,7 @@ lvim.colorscheme = "dracula"
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "right"
+lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- Automatically install missing parsers when entering buffer
@@ -146,11 +145,33 @@ lvim.plugins = {
     "weirongxu/plantuml-previewer.vim",
     "CRAG666/code_runner.nvim",
     "jlcrochet/vim-razor",
-    -- "sigmasd/deno-nvim",
-    "OmniSharp/omnisharp-vim"
     -- "jlcrochet/vim-cs",
+    "sigmasd/deno-nvim",
+    "OmniSharp/omnisharp-vim",
+    "tomlion/vim-solidity",
+
+    {
+        "tzachar/cmp-tabnine",
+        config = function()
+            local tabnine = require("cmp_tabnine.config")
+            tabnine:setup({
+                max_lines = 1000,
+                max_num_results = 20,
+                sort = true,
+            })
+        end,
+        build = "./install.sh",
+        dependencies = "hrsh7th/nvim-cmp",
+    },
 }
 
+require("cmp").setup({
+    sources = {
+        {
+            name = "cmp_tabnine"
+        },
+    }
+})
 
 require("todo-comments").setup()
 
@@ -203,7 +224,7 @@ opts = {
         -- setting it to false may improve startup time
         standalone = true,
         settings = {
-                ["rust-analyzer"] = {
+            ["rust-analyzer"] = {
                 diagnostics = {
                     enable = true,
                     disabled = { "unresolved-proc-macro" },
@@ -230,7 +251,19 @@ opts = {
 local rt = require("rust-tools")
 rt.setup(opts)
 
+
 local lspconfig = require("lspconfig")
+
+lspconfig.solidity_ls.setup({
+    -- on_attach = on_attach, -- probably you will need this.
+    -- capabilities = capabilities,
+    settings = {
+        -- example of global remapping
+        solidity = { includePath = '', remapping = { ["@OpenZeppelin/"] = 'OpenZeppelin/openzeppelin-contracts@4.6.0/' } }
+    },
+})
+
+
 lspconfig.gopls.setup {
     settings = {
         gopls = {
@@ -282,11 +315,12 @@ lspconfig.golangci_lint_ls.setup {
 }
 
 
--- require("deno-nvim").setup({
---     server = {
---         root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "package.json")
---     }
--- })
+
+require("deno-nvim").setup({
+    server = {
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "package.json")
+    }
+})
 
 lspconfig.arduino_language_server.setup {
     cmd = {
@@ -324,14 +358,14 @@ lspconfig.tsserver.setup({
     on_attach = function(client)
         -- prevent tsserver and denols competeing
         local active_clients = vim.lsp.get_active_clients()
-        -- if client.name == "denols" then
-        --     for _, client_ in pairs(active_clients) do
-        --         -- stop tsserver if denols is already active
-        --         if client_.name == "tsserver" then
-        --             client_.stop()
-        --         end
-        --     end
-        -- else
+        if client.name == "denols" then
+            for _, client_ in pairs(active_clients) do
+                -- stop tsserver if denols is already active
+                if client_.name == "tsserver" then
+                    client_.stop()
+                end
+            end
+        end
         if client.name == "tsserver" then
             for _, client_ in pairs(active_clients) do
                 -- prevent tsserver from starting if denols is already active
@@ -351,17 +385,22 @@ lspconfig.tsserver.setup({
     root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json'),
 })
 
-vim.cmd([[
-    let g:OmniSharp_server_stdio = 1
-    let g:OmniSharp_server_use_mono = 0
-    let g:OmniSharp_server_use_net6 = 1
 
-]])
-lspconfig.omnisharp.setup({
-    cmd = { "/Users/doribook/.cache/omnisharp-vim/omnisharp-roslyn/OmniSharp", "--languageserver", "--hostPID",
-        tostring(vim.fn.getpid()) },
-    root_dir = lspconfig.util.root_pattern(".sln", ".git", ".csproj"),
-})
+
+
+
+-- vim.cmd([[
+--     let g:OmniSharp_server_use_net6 = 1
+-- ]])
+-- lspconfig.omnisharp.setup({
+
+--      -- cmd = {
+--     --     "/usr/local/bin/dotnet /Users/doribook/.vscode/extensions/ms-dotnettools.csharp-1.25.4-darwin-arm64/.omnisharp/1.39.4-net6.0/OmniSharp.dll",
+--     --     "--languageserver", "--hostPID",
+--     --     tostring(vim.fn.getpid())
+--     -- },
+--     root_dir = lspconfig.util.root_pattern(".sln", ".git", ".csproj"),
+-- })
 
 -- local lsp_installer_ensure_installed = {
 --     -- LSP
@@ -404,81 +443,4 @@ lspconfig.omnisharp.setup({
 
 -- require("mason-lspconfig").setup({
 --     ensure_installed = lsp_installer_ensure_installed
--- })
-
--- local function find_closest_csproj(directory)
---     -- print("currentFileDirectory: " .. directory)
---     local csproj = vim.fn.glob(directory .. "/*.csproj", true, false)
---     if csproj == "" then
---         -- IF NO FILE IN CURRENT DIRECTORY, LOOK IN PARENT DIRECTORY recursively
---         local parent_directory = vim.fn.fnamemodify(directory, ":h")
---         if parent_directory == directory then
---             return nil
---         end
---         return find_closest_csproj(parent_directory)
---         -- elseif there are multiple csproj files, then return the first one
---     elseif string.find(csproj, "\n") ~= nil then
---         local first_csproj = string.sub(csproj, 0, string.find(csproj, "\n") - 1)
---         print("Found multiple csproj files, using: " .. first_csproj)
---         return first_csproj
---     else
---         return csproj
---     end
--- end
-
--- local function getFrameworkType()
---     local currentFileDirectory = vim.fn.expand("%:p:h")
---     -- print("currentFileDirectory file: " .. currentFileDirectory)
---     local csproj = find_closest_csproj(currentFileDirectory)
---     -- print("csproj file: " .. csproj)
---     if csproj == nil then
---         return false
---     end
---     local f = io.open(csproj, "rb")
---     local content = f:read("*all")
---     f:close()
---     -- return string.find(content, "<TargetFramework>netcoreapp") ~= nil
---     local frameworkType = ""
---     -- IF FILE CONTAINS <TargetFrameworkVersion> THEN IT'S .NET FRAMEWORK
---     if string.find(content, "<TargetFrameworkVersion>") ~= nil then
---         frameworkType = "netframework"
---         -- IF FILE CONTAINS <TargetFramework>net48 THEN IT'S .NET FRAMEWORK
---     elseif string.find(content, "<TargetFramework>net48") ~= nil then
---         frameworkType = "netframework"
---         -- ELSE IT'S .NET CORE
---     else
---         frameworkType = "netcore"
---     end
---     return frameworkType
--- end
-
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = 'cs',
---     callback = function()
---         if vim.g.dotnetlsp then
---             print("dotnetlsp is already set: " .. vim.g.dotnetlsp)
---             return
---         end
---         -- CHECK THE CSPROJ OR SOMETHING ELSE TO CONFIRM IT'S .NET FRAMEWORK OR .NET CORE PROJECT
---         local frameworkType = getFrameworkType()
---         if frameworkType == "netframework" then
---             print("Found a .NET Framework project, starting .NET Framework OmniSharp")
---             lspconfig.omnisharp_mono.setup {
---                 organize_imports_on_format = true,
---             }
---             vim.g.dotnetlsp = "omnisharp_mono"
---             vim.cmd('LspStart omnisharp_mono')
---         elseif frameworkType == "netcore" then
---             print("Found a .NET Core project, starting .NET Core OmniSharp")
---             lspconfig.omnisharp.setup {
---                 organize_imports_on_format = true,
---             }
---             vim.g.dotnetlsp = "omnisharp"
---             vim.cmd('LspStart omnisharp')
---         else
---             -- print("No .csproj file found")
---             return
---         end
---     end,
---     -- group = vim.api.nvim_create_augroup("_nvim-lspconfig.lua.filetype.csharp", { clear = true })
 -- })
