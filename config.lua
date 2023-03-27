@@ -163,7 +163,16 @@ lvim.plugins = {
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
     },
+    { 'codota/tabnine-nvim', build = "./dl_binaries.sh" },
 }
+require('tabnine').setup({
+    disable_auto_comment = true,
+    accept_keymap = "<C-[>",
+    dismiss_keymap = "<C-]>",
+    debounce_ms = 500,
+    suggestion_color = { gui = "#808080", cterm = 244 },
+    exclude_filetypes = { "TelescopePrompt" }
+})
 
 require("cmp").setup({
     sources = {
@@ -193,7 +202,6 @@ lvim.keys.normal_mode["<leader>rp"] = ":RunProject<CR>"
 lvim.keys.normal_mode["<leader>rc"] = ":RunClose<CR>"
 lvim.keys.normal_mode["<leader>rfc"] = ":CRFiletype<CR>"
 lvim.keys.normal_mode["<leader>rpc"] = ":CRProjects<CR>"
-
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
