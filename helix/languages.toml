@@ -1,5 +1,24 @@
+# From Windows
+[[language]]
+name = "markdown"
+indent = { tab-width = 4, unit = "    " }
+# language-server = { command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe" }
+# config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
+auto-format = true
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line_width", "120" ] }
+
+
+# From Windows
 [[language]]
 name = "latex"
+[language.config.build]
+executable = "latexmk"
+args = ["-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"]
+indent = { tab-width = 4, unit = "    " }
+onSave = true
+[language.config.chktex]
+onOpenAndSave = true
+onEdit = true
 indent = { tab-width = 4, unit = "    " }
 
 [[language]]
@@ -44,10 +63,19 @@ indent = { tab-width = 4, unit = "    " }
 name = "haskell"
 indent = { tab-width = 4, unit = "    " }
 
+
 [[language]]
 name = "python"
+roots = ["pyproject.toml"]
 indent = { tab-width = 4, unit = "    " }
+comment-token = "#"
+file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {}
+formatter = { command = "black", args = ["-", "-q"] }
+auto-format = true
 
+# TODO: pyls needs utf-8 offsets
 
 [language.config]
 checkOnSave = { command = "clippy" }
@@ -58,6 +86,42 @@ name = "rust"
 source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9" }
 indent = { tab-width = 4, unit = "    " }
 
+
+# From Windows
+
+# [[language]]
+# name = "javascript"
+# file-types = ["js"]
+# language-server = { command = "typescript-language-server", args = ["--stdio"] }
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js" ] }
+# indent = { tab-width = 4, unit = "    " }
+# auto-format = true
+
+# [[language]]
+# name = "json"
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json" ] }
+# indent = { tab-width = 4, unit = "    " }
+
+
+# [[language]]
+# name = "typescript"
+# file-types = ["ts"]
+# language-server = { command = "typescript-language-server", args = ["--stdio"] }
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts" ] }
+# indent = { tab-width = 4, unit = "    " }
+# auto-format = true
+
+# [[language]]
+# name = "jsx"
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx" ] }
+# indent = { tab-width = 4, unit = "    " }
+# auto-format = true
+
+# [[language]]
+# name = "tsx"
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx" ] }
+# indent = { tab-width = 4, unit = "    " }
+# auto-format = true
 
 # [[language]]
 # name = "javascript"
