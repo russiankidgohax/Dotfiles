@@ -1,68 +1,48 @@
-# From Windows
 [[language]]
 name = "markdown"
 indent = { tab-width = 4, unit = "    " }
+auto-format = true
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line_width", "120",  "--indent-width", "4"] }
 # language-server = { command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe" }
 # config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
+
+
+[[language]]
+name = "html"
+scope = "source.html"
+injection-regex = "html"
+file-types = ["html", "cshtml", "razor"]
+comment-token = "//"
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "html",  "--indent-width", "4"] }
+indent = { tab-width = 4, unit = "    " }
 auto-format = true
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line_width", "120" ] }
 
+[[language]]
+name = "c-sharp"
+scope = "source.cs"
+injection-regex = "c-sharp"
+roots = ["sln", "csproj"]
+file-types = ["cs"]
+comment-token = "//"
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'dotnet format', args = ["--include", "${file}"] }
+language-server = { command = "csharp-ls", timeout=10000 }
+auto-format = true
+# language-server = { command = "C:\\Users\\dorw_lo\\scoop\\shims\\omnisharp.exe", args = ["-lsp"], timeout=1000000 }
 
-# From Windows
 [[language]]
 name = "latex"
+
 [language.config.build]
 executable = "latexmk"
 args = ["-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"]
 indent = { tab-width = 4, unit = "    " }
 onSave = true
+
 [language.config.chktex]
 onOpenAndSave = true
 onEdit = true
 indent = { tab-width = 4, unit = "    " }
-
-[[language]]
-name = "javascript"
-shebangs = ["deno", "node"]
-roots = ["deno.json", "package.json", "tsconfig.json"]
-config = { enable = true, lint = true, unstable = true }
-language-server = { command = "deno", args = ["lsp"], language-id = "javascript" }
-indent = { tab-width = 4, unit = "    " }
-
-[[language]]
-name = "jsx"
-shebangs = ["deno", "node"]
-roots = ["deno.json", "package.json", "tsconfig.json"]
-config = { enable = true, lint = true, unstable = true }
-language-server = { command = "deno", args = ["lsp"], language-id = "javascriptreact" }
-indent = { tab-width = 4, unit = "    " }
-
-[[language]]
-name = "typescript"
-shebangs = ["deno", "node"]
-roots = ["deno.json", "package.json", "tsconfig.json"]
-config = { enable = true, lint = true, unstable = true }
-language-server = { command = "deno", args = ["lsp"], language-id = "typescript" }
-indent = { tab-width = 4, unit = "    " }
-
-[[language]]
-name = "tsx"
-shebangs = ["deno", "node"]
-roots = ["deno.json", "package.json", "tsconfig.json"]
-config = { enable = true, lint = true, unstable = true }
-language-server = { command = "deno", args = ["lsp"], language-id = "typescriptreact" }
-indent = { tab-width = 4, unit = "    " }
-
-[[language]]
-name = "c-sharp"
-language-server = {command = "/usr/local/bin/dotnet", args = [ "/Users/doribook/.vscode/extensions/ms-dotnettools.csharp-1.25.4-darwin-arm64/.omnisharp/1.39.4-net6.0/OmniSharp.dll", "--languageserver" ]}
-indent = { tab-width = 4, unit = "    " }
-
-
-[[language]]
-name = "haskell"
-indent = { tab-width = 4, unit = "    " }
-
 
 [[language]]
 name = "python"
@@ -75,97 +55,38 @@ config = {}
 formatter = { command = "black", args = ["-", "-q"] }
 auto-format = true
 
-# TODO: pyls needs utf-8 offsets
 
-[language.config]
-checkOnSave = { command = "clippy" }
+[[language]]
+name = "javascript"
+language-server = { command = "typescript-language-server", args = ["--stdio"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js",  "--indent-width", "4"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+[[language]]
+name = "json"
+language-server = { command = "typescript-language-server", args = ["--stdio"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json",  "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 
-[[grammar]]
-name = "rust"
-source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9" }
+
+[[language]]
+name = "typescript"
+language-server = { command = "typescript-language-server", args = ["--stdio"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts",  "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
+[[language]]
+name = "jsx"
+language-server = { command = "typescript-language-server", args = ["--stdio"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx",  "--indent-width", "4"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
-# From Windows
-
-# [[language]]
-# name = "javascript"
-# file-types = ["js"]
-# language-server = { command = "typescript-language-server", args = ["--stdio"] }
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js" ] }
-# indent = { tab-width = 4, unit = "    " }
-# auto-format = true
-
-# [[language]]
-# name = "json"
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json" ] }
-# indent = { tab-width = 4, unit = "    " }
-
-
-# [[language]]
-# name = "typescript"
-# file-types = ["ts"]
-# language-server = { command = "typescript-language-server", args = ["--stdio"] }
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts" ] }
-# indent = { tab-width = 4, unit = "    " }
-# auto-format = true
-
-# [[language]]
-# name = "jsx"
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx" ] }
-# indent = { tab-width = 4, unit = "    " }
-# auto-format = true
-
-# [[language]]
-# name = "tsx"
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx" ] }
-# indent = { tab-width = 4, unit = "    " }
-# auto-format = true
-
-# [[language]]
-# name = "javascript"
-# scope = "source.js"
-# injection-regex = "^(js|javascript)$"
-# file-types = ["js", "jsx", "mjs"]
-# shebangs = ["deno", "node"]
-# roots = ["deno.json", "package.json", "tsconfig.json"]
-# comment-token = "//"
-# config = { enable = true, lint = true, unstable = true }
-# language-server = { command = "deno", args = ["lsp"], language-id = "javascript" }
-# indent = { tab-width = 2, unit = "  " }
-
-# [[language]]
-# name = "jsx"
-# scope = "source.jsx"
-# injection-regex = "jsx"
-# file-types = ["jsx"]
-# shebangs = ["deno", "node"]
-# roots = ["deno.json", "package.json", "tsconfig.json"]
-# comment-token = "//"
-# config = { enable = true, lint = true, unstable = true }
-# language-server = { command = "deno", args = ["lsp"], language-id = "javascriptreact" }
-# indent = { tab-width = 2, unit = "  " }
-# grammar = "javascript"
-
-# [[language]]
-# name = "typescript"
-# scope = "source.ts"
-# injection-regex = "^(ts|typescript)$"
-# file-types = ["ts"]
-# shebangs = ["deno", "node"]
-# roots = ["deno.json", "package.json", "tsconfig.json"]
-# config = { enable = true, lint = true, unstable = true }
-# language-server = { command = "deno", args = ["lsp"], language-id = "typescript" }
-# indent = { tab-width = 2, unit = "  " }
-
-# [[language]]
-# name = "tsx"
-# scope = "source.tsx"
-# injection-regex = "^(tsx)$" # |typescript
-# file-types = ["tsx"]
-# shebangs = ["deno", "node"]
-# roots = ["deno.json", "package.json", "tsconfig.json"]
-# config = { enable = true, lint = true, unstable = true }
-# language-server = { command = "deno", args = ["lsp"], language-id = "typescriptreact" }
-# indent = { tab-width = 2, unit = "  " }
+[[language]]
+name = "tsx"
+language-server = { command = "typescript-language-server", args = ["--stdio"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx",  "--indent-width", "4"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
