@@ -9,6 +9,7 @@ bufferline = "multiple"
 g = { a = "code_action" } # maps 'ga' to show possible code actions
 esc = ["collapse_selection", "keep_primary_selection"]
 "G" = ["goto_last_line", "goto_line_end"]
+"0" = ["goto_line_start"]
 "X" = ["extend_line_above"]
 
 [keys.insert]
