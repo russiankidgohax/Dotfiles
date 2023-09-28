@@ -2,7 +2,7 @@
 name = "markdown"
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line_width", "120",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
 # language-server = { command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe" }
 # config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
 
@@ -13,7 +13,7 @@ scope = "source.html"
 injection-regex = "html"
 file-types = ["html", "cshtml", "razor"]
 comment-token = "//"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "html",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "html", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
@@ -28,21 +28,80 @@ indent = { tab-width = 4, unit = "    " }
 formatter = { command = 'dotnet format', args = ["--include", "${file}"] }
 language-server = { command = "csharp-ls", timeout=10000 }
 auto-format = true
-# language-server = { command = "C:\\Users\\dorw_lo\\scoop\\shims\\omnisharp.exe", args = ["-lsp"], timeout=1000000 }
+# language-server = { command = "C:\\Users\\dorw_lo\\scoop\\shims\\\omnisharp.exe", args = ["-lsp"], timeout=1000000 }
 
+# [[language]]
+# name = "bibtex"
+# file-types = ["bib"]
+# indent = { tab-width = 4, unit = "    " }
+# formatter = { command = "bibtex-tidy", args = ["--modify", "--space=4", "--no-tab", "--escape", "--strip-enclosing-braces", "--drop-all-caps", "--wrap=120", "${file}"] }
+# auto-format = true
 [[language]]
 name = "latex"
 
-[language.config.build]
-executable = "latexmk"
-args = ["-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"]
-indent = { tab-width = 4, unit = "    " }
-onSave = true
+[language.config.texlab]
+auxDirectory = "build"
 
-[language.config.chktex]
+[language.config.texlab.chktex]
 onOpenAndSave = true
 onEdit = true
-indent = { tab-width = 4, unit = "    " }
+
+# [language.config.texlab.forwardSearch]
+# executable = "zathura"
+# args = [ "--synctex-forward", "%l:%c:%f", "%p" ]
+
+# executable = "okular"
+# args = ["--unique", "file:%p#src:%l%f"]
+
+[language.config.texlab.build]
+forwardSearchAfter = true
+onSave = true
+
+# executable = "latexmk"
+# args = [
+#  "-pdf",
+#  "-interaction=nonstopmode",
+#  "-synctex=1",
+#  "-shell-escape",
+#  "-output-directory=build",
+#  "%f"
+#  ]
+
+executable = "tectonic"
+args = [
+ "-X",
+ "compile",
+ "%f",
+ "--synctex",
+ "--keep-logs",
+ "--keep-intermediates",
+ "--outdir=build",
+ "-Zshell-escape",
+]
+# [[language]]
+# name = "latex"
+# scope = "source.tex"
+# injection-regex = "latex"
+# roots = ["pdf"]
+# file-types = ["tex"]
+# comment-token = "%"
+# indent = { tab-width = 4, unit = "    " }
+# formatter = { command = "latexindent", args = ["-i", "4", "-w", "120", "${file}", "-o", "${file}"] }
+# auto-format = true
+
+# [[language]]
+# name = "latex"
+
+# [language.config.build]
+# executable = "latexmk"
+# args = ["-pdf", "-interaction=nonstopmode", "-synctex=1", "%f"]
+# indent = { tab-width = 4, unit = "    " }
+# onSave = true
+
+# [language.config.chktex]
+# onOpenAndSave = true
+# onEdit = true
+# indent = { tab-width = 4, unit = "    " }
 
 [[language]]
 name = "python"
@@ -59,34 +118,34 @@ auto-format = true
 [[language]]
 name = "javascript"
 language-server = { command = "typescript-language-server", args = ["--stdio"] }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "json"
 language-server = { command = "typescript-language-server", args = ["--stdio"] }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 
 
 [[language]]
 name = "typescript"
 language-server = { command = "typescript-language-server", args = ["--stdio"] }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "jsx"
 language-server = { command = "typescript-language-server", args = ["--stdio"] }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "tsx"
 language-server = { command = "typescript-language-server", args = ["--stdio"] }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx",  "--indent-width", "4"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
