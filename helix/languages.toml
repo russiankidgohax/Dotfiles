@@ -1,11 +1,14 @@
+
 [[language]]
 name = "markdown"
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
-# language-server = { command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe" }
-# config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
+language-servers = [ { name = "markdown-mdpls" } ]
 
+[language-server.markdown-mdpls]
+command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe"
+config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
 
 [[language]]
 name = "html"
@@ -26,9 +29,15 @@ file-types = ["cs"]
 comment-token = "//"
 indent = { tab-width = 4, unit = "    " }
 formatter = { command = 'dotnet format', args = ["--include", "${file}"] }
-language-server = { command = "csharp-ls", timeout=10000 }
 auto-format = true
-# language-server = { command = "C:\\Users\\dorw_lo\\scoop\\shims\\\omnisharp.exe", args = ["-lsp"], timeout=1000000 }
+
+# [language-server.csharp-ls]
+# command = "csharp-ls"
+# timeout = 10000
+# [language-server.omnisharp]
+# command = "C:\\Users\\dorw_lo\\scoop\\shims\\\omnisharp.exe"
+# args = ["-lsp"]
+# timeout = 10000
 
 # [[language]]
 # name = "bibtex"
@@ -39,12 +48,12 @@ auto-format = true
 [[language]]
 name = "latex"
 
-[language.config.texlab]
-auxDirectory = "build"
+# [language.config.texlab]
+# auxDirectory = "build"
 
-[language.config.texlab.chktex]
-onOpenAndSave = true
-onEdit = true
+# [language.config.texlab.chktex]
+# onOpenAndSave = true
+# onEdit = true
 
 # [language.config.texlab.forwardSearch]
 # executable = "zathura"
@@ -53,9 +62,9 @@ onEdit = true
 # executable = "okular"
 # args = ["--unique", "file:%p#src:%l%f"]
 
-[language.config.texlab.build]
-forwardSearchAfter = true
-onSave = true
+# [language.config.texlab.build]
+# forwardSearchAfter = true
+# onSave = true
 
 # executable = "latexmk"
 # args = [
@@ -67,17 +76,17 @@ onSave = true
 #  "%f"
 #  ]
 
-executable = "tectonic"
-args = [
- "-X",
- "compile",
- "%f",
- "--synctex",
- "--keep-logs",
- "--keep-intermediates",
- "--outdir=build",
- "-Zshell-escape",
-]
+# executable = "tectonic"
+# args = [
+#  "-X",
+#  "compile",
+#  "%f",
+#  "--synctex",
+#  "--keep-logs",
+#  "--keep-intermediates",
+#  "--outdir=build",
+#  "-Zshell-escape",
+# ]
 # [[language]]
 # name = "latex"
 # scope = "source.tex"
@@ -109,43 +118,53 @@ roots = ["pyproject.toml"]
 indent = { tab-width = 4, unit = "    " }
 comment-token = "#"
 file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
-language-server = { command = "pyright-langserver", args = ["--stdio"] }
-config = {}
 formatter = { command = "black", args = ["-", "-q"] }
 auto-format = true
 
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+
+[language-server.tls]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.deno]
+command = "deno"
+args = ["lsp"]
 
 [[language]]
 name = "javascript"
-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js", "--line-width", "120", "--indent-width", "4"] }
+language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "json"
-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json", "--indent-width", "4"] }
+language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 
 
 [[language]]
 name = "typescript"
-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts", "--line-width", "120", "--indent-width", "4"] }
+language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "jsx"
-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx", "--line-width", "120", "--indent-width", "4"] }
+language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[language]]
 name = "tsx"
-language-server = { command = "typescript-language-server", args = ["--stdio"] }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx", "--line-width", "120", "--indent-width", "4"] }
+language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
