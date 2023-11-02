@@ -6,7 +6,21 @@ if ([string]::IsNullOrEmpty($file_name)) {
 }
 
 $file_base_name = [System.IO.Path]::GetFileNameWithoutExtension($file_name)
-pandoc.exe $file_name -s -o .\$file_base_name.pdf --pdf-engine tectonic --filter pandoc-plantuml -V colorlinks=true -V urlcolor="purple" -V mainfont="Montserrat" -V monofont="JetBrainsMono"
+
+if (Test-Path ".\$file_base_name.pdf") {
+    Remove-Item .\$file_base_name.pdf
+}
+
+pandoc.exe $file_name -s -o .\$file_base_name.pdf --pdf-engine xelatex --filter pandoc-plantuml -V colorlinks=true -V urlcolor="purple" -V mainfont="Montserrat" -V monofont="JetBrainsMono-Bold"
+
+if (!(Test-Path ".\$file_base_name.pdf")) {
+    Write-Host "Error: File could not be pandoced to .\$file_base_name.pdf."
+    exit 1
+}
+
 Start-Process .\$file_base_name.pdf
-Remove-Item .\plantuml-images\* -Force
+
+if (Test-Path ".\plantuml-images") {
+    Remove-Item .\plantuml-images\* -Force
+}
 
