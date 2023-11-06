@@ -2,7 +2,10 @@
 $current_date = Get-Date -Format "yyyyMMdd"
 
 # Define the path to the date file
-$date_file = "C:\Users\dorw_lu\Documents\date_file.txt"
+
+$documents_folder = [Environment]::GetFolderPath("MyDocuments")
+$date_file = "$documents_folder\date_file.txt"
+Write-Output $date_file
 
 # Check if the date file exists and matches the current date
 if (Test-Path $date_file) {
