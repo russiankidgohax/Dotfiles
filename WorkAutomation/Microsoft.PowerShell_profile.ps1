@@ -13,4 +13,4 @@ if (Test-Path($ChocolateyProfile)) {
 
 Set-Alias "ex" "explorer"
 
-C:\\Users\\dorw_lu\\Documents\\own-docs\\src\\ps\\copy_own_docs_to_H_drive.ps1
+C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
