@@ -5,7 +5,6 @@ $current_date = Get-Date -Format "yyyyMMdd"
 
 $documents_folder = [Environment]::GetFolderPath("MyDocuments")
 $date_file = "$documents_folder\date_file.txt"
-Write-Output $date_file
 
 # Check if the date file exists and matches the current date
 if (Test-Path $date_file) {
@@ -16,7 +15,7 @@ if (Test-Path $date_file) {
 }
 
 # If the date variable does not exist or does not match, proceed to copy the files
-Copy-Item -Path "C:\Users\dorw_lu\Documents\own-docs\*" -Destination "H:\" -Recurse -Force
+Copy-Item -Path "$documents_folder\own-docs\*" -Destination "H:\" -Recurse -Force
 
 # Update the date file
 $current_date | Out-File $date_file
