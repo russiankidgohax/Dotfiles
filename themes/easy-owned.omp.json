@@ -131,7 +131,7 @@
                     "trailing_diamond": "\ue0b0",
                     "properties": {
                         "style": "austin",
-                        "threshold": 150
+                        "threshold": 1
                     },
                     "style": "diamond",
                     "template": "⌛  {{ .FormattedMs }} ",
