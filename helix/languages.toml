@@ -1,10 +1,22 @@
 
 [[language]]
+name = "pwsh"
+scope = "source.ps1"
+roots = [".git"]
+file-types = ["ps1"]
+comment-token = "#"
+indent = { tab-width = 4, unit = "    " }
+# language-servers = [ "pwsh" ]
+
+# [language-server.pwsh]
+# command = "pwsh"
+# args = ["-NoLogo -NoProfile -Command '$PSES_BUNDLE_PATH/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath $PSES_BUNDLE_PATH -LogPath $SESSION_TEMP_PATH/logs.log -SessionDetailsPath $SESSION_TEMP_PATH/session.json -FeatureFlags @() -AdditionalModules @() -HostName 'My Client' -HostProfileId 'myclient' -HostVersion 1.0.0 -LogLevel Normal'"]
+
+[[language]]
 name = "markdown"
 indent = { tab-width = 4, unit = "    " }
-auto-format = true
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
-language-servers = [ { name = "markdown-mdpls" } ]
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
+# language-servers = [ { name = "markdown-mdpls" } ]
 
 [language-server.markdown-mdpls]
 command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe"
@@ -120,11 +132,13 @@ comment-token = "#"
 file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
 formatter = { command = "black", args = ["-", "-q"] }
 auto-format = true
+language-servers = ["pyright"]
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
-
+[language-server.pylsp]
+command = "pylsp"
 
 [language-server.tls]
 command = "typescript-language-server"
@@ -135,36 +149,22 @@ command = "deno"
 args = ["lsp"]
 
 [[language]]
-name = "javascript"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js", "--line-width", "120", "--indent-width", "4"] }
-language-servers = [{name = "deno"}]
+name = "json"
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
-auto-format = true
+language-servers = ["deno", "tls"]
 
 [[language]]
-name = "json"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json", "--indent-width", "4"] }
-language-servers = [{name = "deno"}]
+name = "javascript"
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
+auto-format = true
+language-servers = ["deno", "tls"]
 
 
 [[language]]
 name = "typescript"
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts", "--line-width", "120", "--indent-width", "4"] }
-language-servers = [{name = "deno"}]
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
-
-[[language]]
-name = "jsx"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx", "--line-width", "120", "--indent-width", "4"] }
-language-servers = [{name = "deno"}]
-indent = { tab-width = 4, unit = "    " }
-auto-format = true
-
-[[language]]
-name = "tsx"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx", "--line-width", "120", "--indent-width", "4"] }
-language-servers = [{name = "deno"}]
-indent = { tab-width = 4, unit = "    " }
-auto-format = true
+language-servers = ["deno", "tls"]
