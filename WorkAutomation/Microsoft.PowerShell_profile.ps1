@@ -1,4 +1,4 @@
-oh-my-posh init pwsh --config 'C:\Users\dorw_lu\Documents\own-docs\Dotfiles\themes\easy-owned.omp.json' | Invoke-Expression
+oh-my-posh init pwsh --config "~\easy-owned.omp.json" | Invoke-Expression
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -Function BackwardKillWord
 
 # See https://ch0.co/tab-completion for details.
