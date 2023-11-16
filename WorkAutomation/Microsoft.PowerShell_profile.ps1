@@ -39,6 +39,7 @@ function Run-Cargo {
 }
 Set-Alias cr Run-Cargo
 
-if ($env:WORK_PC = 1) {
+$IsWorkPC = $env:WORK_PC
+if ($IsWorkPC) {
   C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
 }
