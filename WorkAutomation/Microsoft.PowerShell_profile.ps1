@@ -1,4 +1,11 @@
-oh-my-posh init pwsh --config "~\easy-owned.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
+
+$IsWorkPC = $env:WORK_PC
+if ($IsWorkPC -eq 1) {
+  oh-my-posh init pwsh --config $env:USERPROFILE\easy-owned.omp.json | Invoke-Expression
+  C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
+}
+
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -Function BackwardKillWord
 
 # See https://ch0.co/tab-completion for details.
@@ -45,8 +52,3 @@ function Run-Cargo {
   cargo run $args
 }
 Set-Alias cr Run-Cargo
-
-$IsWorkPC = $env:WORK_PC
-if ($IsWorkPC -eq 1) {
-  C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
-}
