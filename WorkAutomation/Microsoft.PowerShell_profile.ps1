@@ -8,10 +8,17 @@ if (Test-Path($ChocolateyProfile)) {
 }
 
 Set-Alias ex explorer
+Set-Alias open explorer
 Set-Alias which Get-Command
 Set-Alias lg lazygit
 Set-Alias lazy lazygit
 Set-Alias c conda
+
+function Update-Profile {
+  . $PROFILE; refreshenv;
+}
+Set-Alias update Update-Profile
+Set-Alias ud Update-Profile
 
 function Conda-Deactivate {
   conda deactivate
