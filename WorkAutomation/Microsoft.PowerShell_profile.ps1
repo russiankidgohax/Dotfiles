@@ -41,6 +41,5 @@ Set-Alias cr Run-Cargo
 
 $IsWorkPC = $env:WORK_PC
 if ($IsWorkPC -eq 1) {
-  Write-Host $IsWorkPC
   C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
 }
