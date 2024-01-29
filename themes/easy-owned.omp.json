@@ -37,7 +37,7 @@
                     "foreground": "#ffffff",
                     "powerline_symbol": "\ue0b0",
                     "style": "diamond",
-                    "template": " ¯\\_(ツ)_/¯ ",
+                    "template": " ツ ",
                     "type": "text"
                 },
                 {
@@ -46,7 +46,7 @@
                     "powerline_symbol": "\ue0b0",
                     "properties": {
                         "style": "mixed",
-                        "mixed_threshold": 7,
+                        "mixed_threshold": 5,
                         "home_icon": "🏠",
                         "folder_icon": "\uf07b",
                         "folder_separator_icon": " \u276f "
@@ -85,7 +85,7 @@
                 {
                     "foreground": "#81ff91",
                     "style": "diamond",
-                    "template": "<#cc7eda> \u007C </><#7eb8da>RAM:</> {{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1000000000.0) }}/{{ (div .PhysicalTotalMemory 1000000000.0) }}GB",
+                    "template": "<#cc7eda> \u007C </><#7eb8da></>{{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1000000000.0) }}/{{ (div .PhysicalTotalMemory 1000000000.0) }}GB",
                     "type": "sysinfo"
                 },
                 {
@@ -95,7 +95,7 @@
                         "display_virtual_env": true
                     },
                     "style": "powerline",
-                    "template": "<#cc7eda> \u007C </><#7eb8da></> {{ if .Env.CONDA_DEFAULT_ENV }}{{ .Env.CONDA_DEFAULT_ENV }}{{ end }}",
+                    "template": "<#cc7eda> \u007C </><#7eb8da></> {{ if .Env.CONDA_DEFAULT_ENV }}{{ .Env.CONDA_DEFAULT_ENV }}{{ end }} {{ if .Env.VIRTUAL_ENV_PROMPT }}{{ .Env.VIRTUAL_ENV_PROMPT }}{{ end }}",
                     "type": "python"
                 },
                 {
