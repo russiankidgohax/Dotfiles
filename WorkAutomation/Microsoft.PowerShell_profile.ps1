@@ -3,7 +3,7 @@ oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
 $IsWorkPC = $env:WORK_PC
 if ($IsWorkPC -eq 1) {
   oh-my-posh init pwsh --config $env:USERPROFILE\easy-owned.omp.json | Invoke-Expression
-  C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
+  # C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
 }
 
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -Function BackwardKillWord
@@ -52,3 +52,30 @@ function Run-Cargo {
   cargo run $args
 }
 Set-Alias cr Run-Cargo
+
+function Get-Full-History {
+  cat (Get-PSReadlineOption).HistorySavePath
+}
+Set-Alias Get-Full-Hist Get-Full-History
+
+function Load-Posh-Theme {
+  oh-my-posh init pwsh --config $env:USERPROFILE\easy-owned.omp.json | Invoke-Expression
+}
+
+Set-Alias lpt Load-Posh-Theme
+
+
+function Update-Programs {
+  winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; deno upgrade; python -m pip install --upgrade pip
+}
+
+Set-Alias up Update-Programs
+
+function Make-Dir-And-Change-To-Dir {
+  param (
+      [string]$dirName
+  )
+  mkdir $dirName
+  cd $dirName
+}
+Set-Alias mc Make-Dir-And-Change-To-Dir
