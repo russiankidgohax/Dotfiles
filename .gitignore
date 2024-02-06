@@ -2,4 +2,4 @@ after
 after/*
 lazy-lock.json
 .idea
-*/**/copy_own_docs_to_H_drive.ps1
+*/copy_own_docs_to_H_drive.ps1
