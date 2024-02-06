@@ -66,7 +66,7 @@ Set-Alias lpt Load-Posh-Theme
 
 
 function Update-Programs {
-  winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; deno upgrade; python -m pip install --upgrade pip
+  deno upgrade; winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
 }
 
 Set-Alias up Update-Programs
@@ -79,3 +79,6 @@ function Make-Dir-And-Change-To-Dir {
   cd $dirName
 }
 Set-Alias mc Make-Dir-And-Change-To-Dir
+
+
+Set-Alias pycharm "C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2023.3.3\\bin\\pycharm64.exe"
