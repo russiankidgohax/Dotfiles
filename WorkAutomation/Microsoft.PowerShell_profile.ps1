@@ -1,10 +1,3 @@
-oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
-
-$IsWorkPC = $env:WORK_PC
-if ($IsWorkPC -eq 1) {
-  oh-my-posh init pwsh --config $env:USERPROFILE\easy-owned.omp.json | Invoke-Expression
-  # C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
-}
 
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -Function BackwardKillWord
 
@@ -80,5 +73,18 @@ function Make-Dir-And-Change-To-Dir {
 }
 Set-Alias mc Make-Dir-And-Change-To-Dir
 
+function Print-Env {
+  Get-ChildItem Env:;
+}
+Set-Alias -Name printenv -Value Print-Env
 
 Set-Alias pycharm "C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2023.3.3\\bin\\pycharm64.exe"
+
+
+oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
+
+$IsWorkPC = $env:WORK_PC
+if ($IsWorkPC -eq 1) {
+  Load-Posh-Theme
+  # C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
+}
