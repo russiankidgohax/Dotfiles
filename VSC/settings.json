@@ -1,0 +1,67 @@
+{
+    "workbench.colorTheme": "Dracula Dark+",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "editor.fontWeight": "600",
+    "editor.fontLigatures": true,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "redhat.telemetry.enabled": true,
+    "editor.codeLensFontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "editor.inlayHints.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontWeightBold": "bold",
+    "terminal.integrated.fontWeight": "600",
+    "svelte.enable-ts-plugin": true,
+    "window.zoomLevel": -1,
+    "continue.enableTabAutocomplete": true,
+    "editor.lineNumbers": "relative",
+
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["J", "K"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "d"],
+            "after": ["d", "d"]
+        },
+        {
+            "before": ["<C-n>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["lineBreakInsert"],
+            "silent": true
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-x>": false,
+        "<C-p>": false,
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-k>": false,
+        "<C-,>": false
+    },
+    "vim.commandLineModeKeyBindingsNonRecursive": [],
+    "editor.formatOnSave": true,
+    "notebook.formatOnSave.enabled": true,
+
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "git.autofetch": true
+}
