@@ -59,7 +59,7 @@ Set-Alias lpt Load-Posh-Theme
 
 
 function Update-Programs {
-  deno upgrade; winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
+  winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
 }
 
 Set-Alias up Update-Programs
