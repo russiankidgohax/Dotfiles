@@ -59,7 +59,7 @@ Set-Alias lpt Load-Posh-Theme
 
 
 function Update-Programs {
-  winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
+  winget uninstall denoland.deno --force; winget install denoland.deno; winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
 }
 
 Set-Alias up Update-Programs
@@ -86,5 +86,4 @@ oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
 $IsWorkPC = $env:WORK_PC
 if ($IsWorkPC -eq 1) {
   Load-Posh-Theme
-  # C:\\Users\\dorw_lu\\Documents\\own-docs\\Dotfiles\\WorkAutomation\\copy_own_docs_to_H_drive.ps1
 }
