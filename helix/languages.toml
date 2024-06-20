@@ -13,14 +13,30 @@ indent = { tab-width = 4, unit = "    " }
 # args = ["-NoLogo -NoProfile -Command '$PSES_BUNDLE_PATH/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath $PSES_BUNDLE_PATH -LogPath $SESSION_TEMP_PATH/logs.log -SessionDetailsPath $SESSION_TEMP_PATH/session.json -FeatureFlags @() -AdditionalModules @() -HostName 'My Client' -HostProfileId 'myclient' -HostVersion 1.0.0 -LogLevel Normal'"]
 
 [[language]]
+name = "bash"
+file-types = ["sh"]
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = "shfmt", args = ["-i", "4"] }
+auto-format = true
+language-servers = ["bashls"]
+
+[language-server.bashls]
+command = "bash-language-server"
+args = ["start"]
+language-servers = ["shellcheck", "bashls"]
+
+[language-server.shellcheck]
+command = "shellcheck"
+
+[[language]]
 name = "markdown"
 indent = { tab-width = 4, unit = "    " }
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
-# language-servers = [ { name = "markdown-mdpls" } ]
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width", "120", "--indent-width", "4"] }
+# language-servers = ["markdown-mdpls"]
 
-[language-server.markdown-mdpls]
-command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe"
-config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
+# [language-server.markdown-mdpls]
+# command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe"
+# config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
 
 [[language]]
 name = "html"
@@ -132,11 +148,15 @@ comment-token = "#"
 file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
 formatter = { command = "black", args = ["-", "-q"] }
 auto-format = true
-language-servers = ["pyright"]
+language-servers = ["ruff", "pylsp"]
+
+[language-server.ruff]
+command = "ruff-lsp"
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
+
 [language-server.pylsp]
 command = "pylsp"
 
