@@ -1,4 +1,3 @@
-
 [[language]]
 name = "pwsh"
 scope = "source.ps1"
@@ -148,7 +147,7 @@ comment-token = "#"
 file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
 formatter = { command = "black", args = ["-", "-q"] }
 auto-format = true
-language-servers = ["ruff", "pylsp"]
+language-servers = ["ruff", "pylsp", "pyright"]
 
 [language-server.ruff]
 command = "ruff-lsp"
@@ -159,6 +158,16 @@ args = ["--stdio"]
 
 [language-server.pylsp]
 command = "pylsp"
+
+[language-server.pylsp.config.pylsp.plugins]
+flake8 = {enabled = true}
+autopep8 = {enabled = false}
+mccabe = {enabled = false}
+pycodestyle = {enabled = false}
+pyflakes = {enabled = false}
+pylint = {enabled = false}
+yapf = {enabled = false}
+ruff = {enabled = false}
 
 [language-server.tls]
 command = "typescript-language-server"
