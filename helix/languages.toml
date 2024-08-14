@@ -5,11 +5,13 @@ roots = [".git"]
 file-types = ["ps1"]
 comment-token = "#"
 indent = { tab-width = 4, unit = "    " }
-# language-servers = [ "pwsh" ]
 
+# language-servers = [ "pwsh" ]
 # [language-server.pwsh]
 # command = "pwsh"
 # args = ["-NoLogo -NoProfile -Command '$PSES_BUNDLE_PATH/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath $PSES_BUNDLE_PATH -LogPath $SESSION_TEMP_PATH/logs.log -SessionDetailsPath $SESSION_TEMP_PATH/session.json -FeatureFlags @() -AdditionalModules @() -HostName 'My Client' -HostProfileId 'myclient' -HostVersion 1.0.0 -LogLevel Normal'"]
+
+# https://github.com/helix-editor/helix/blob/master/languages.toml
 
 [[language]]
 name = "bash"
@@ -37,13 +39,13 @@ formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md", "--line-width
 # command = "C:\\Users\\dorw_lo\\.cargo\\bin\\mdpls.exe"
 # config = { markdown.preview.auto = true, markdown.preview.browser = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" }
 
+# Use npm i -g vscode-langservers-extracted to install the html etc. language server
 [[language]]
 name = "html"
 scope = "source.html"
 injection-regex = "html"
 file-types = ["html", "cshtml", "razor"]
 comment-token = "//"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "html", "--line-width", "120", "--indent-width", "4"] }
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
