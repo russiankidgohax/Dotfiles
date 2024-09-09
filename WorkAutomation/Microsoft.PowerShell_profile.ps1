@@ -1,4 +1,3 @@
-
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -Function BackwardKillWord
 
 # See https://ch0.co/tab-completion for details.
@@ -59,7 +58,14 @@ Set-Alias lpt Load-Posh-Theme
 
 
 function Update-Programs {
-  winget uninstall denoland.deno --force; winget install denoland.deno; winget upgrade --all --include-unknown; choco upgrade all; scoop update --all; python -m pip install --upgrade pip
+  winget uninstall denoland.deno --force
+  winget install denoland.deno
+  winget upgrade --all --include-unknown
+  choco upgrade all
+  scoop update --all
+  scoop status
+  python -m pip install --upgrade pip
+  conda update -n base -c conda-forge conda
 }
 
 Set-Alias up Update-Programs
@@ -76,10 +82,10 @@ Set-Alias mc Make-Dir-And-Change-To-Dir
 function Print-Env {
   Get-ChildItem Env:;
 }
+
 Set-Alias -Name printenv -Value Print-Env
 
-Set-Alias pycharm "C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2023.3.3\\bin\\pycharm64.exe"
-
+Set-Alias pycharm "C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2024.1.4\\bin\\pycharm64.exe"
 
 oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
 
