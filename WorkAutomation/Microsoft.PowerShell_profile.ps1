@@ -48,7 +48,7 @@ Set-Alias cr Run-Cargo
 function Get-Full-History {
   cat (Get-PSReadlineOption).HistorySavePath
 }
-Set-Alias Get-Full-Hist Get-Full-History
+Set-Alias gfh Get-Full-History
 
 function Load-Posh-Theme {
   oh-my-posh init pwsh --config $env:USERPROFILE\easy-owned.omp.json | Invoke-Expression
@@ -85,7 +85,8 @@ function Print-Env {
 
 Set-Alias -Name printenv -Value Print-Env
 
-Set-Alias pycharm "C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2024.1.4\\bin\\pycharm64.exe"
+Set-Alias python3.11 "C:\\Users\\dorw_lu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+Set-Alias python3.12 "C:\\Users\\dorw_lu\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
 
 oh-my-posh init pwsh --config ~\easy-owned.omp.json | Invoke-Expression
 
