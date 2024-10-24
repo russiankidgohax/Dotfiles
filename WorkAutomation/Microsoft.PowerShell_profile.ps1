@@ -58,12 +58,11 @@ Set-Alias lpt Load-Posh-Theme
 
 
 function Update-Programs {
-  winget uninstall denoland.deno --force
-  winget install denoland.deno
   winget upgrade --all --include-unknown
   choco upgrade all
   scoop update --all
   scoop status
+  deno upgrade
   python -m pip install --upgrade pip
   conda update -n base -c conda-forge conda
 }
